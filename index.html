@@ -123,12 +123,11 @@
 </header>
 
 <div class="hero">
-  <span class="tagline">le blog d'une maîtresse à cinq niveaux</span>
-  <h1>Une classe, cinq rythmes, zéro panique.</h1>
+  <span class="tagline">le blog d'une maîtresse à quatre niveaux</span>
+  <h1>Une classe, quatre rythmes, zéro panique.</h1>
   <p>Des idées d'ateliers, des plannings tout faits et du matériel testé pour enseigner à plusieurs niveaux sans t'épuiser.</p>
 
   <div class="cards-row">
-    <div class="planner"><span class="pill cp">CP</span><strong>Découverte</strong><p>Manipulation encadrée avec toi</p></div>
     <div class="planner"><span class="pill ce1">CE1</span><strong>Lecture guidée</strong><p>Petit groupe, dix minutes chrono</p></div>
     <div class="planner"><span class="pill ce2">CE2</span><strong>Atelier tournant</strong><p>En autonomie, fiche de suivi</p></div>
     <div class="planner"><span class="pill cm1">CM1</span><strong>Plan de travail</strong><p>Objectifs de la semaine</p></div>
@@ -172,7 +171,8 @@
 const pillColors = {
   "Organisation": {bg:"#EFE8F7", color:"#5B4A7A"},
   "Matériel": {bg:"#FBE4E7", color:"#C4576E"},
-  "Retour de classe": {bg:"#FDF0DE", color:"#8A6320"}
+  "Retour de classe": {bg:"#FDF0DE", color:"#8A6320"},
+  "Présentation": {bg:"#F3E1EC", color:"#8A4A78"}
 };
 
 fetch('content/posts.json')
@@ -183,7 +183,8 @@ fetch('content/posts.json')
       grid.innerHTML = '<p style="text-align:center; color:var(--ink-soft); grid-column:1/-1;">Pas encore d\'article publié.</p>';
       return;
     }
-    grid.innerHTML = posts.slice().reverse().map(post => {
+    const sorted = posts.slice().sort((a,b) => new Date(b.date) - new Date(a.date));
+    grid.innerHTML = sorted.map(post => {
       const colors = pillColors[post.tag] || {bg:"#FBE4E7", color:"#C4576E"};
       return `<div class="card">
         <span class="pill" style="background:${colors.bg}; color:${colors.color};">${post.tag}</span>
@@ -216,3 +217,4 @@ document.getElementById('produits-grid').innerHTML = produits.map(p => `
 
 </body>
 </html>
+
