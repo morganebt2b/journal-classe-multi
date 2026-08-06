@@ -1,0 +1,23 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    files:
+      - name: "posts"
+        label: "Liste des articles"
+        file: "content/posts.json"
+        fields:
+          - {label: "Articles", name: "posts", widget: "list", fields: [
+              {label: "Titre", name: "title", widget: "string"},
+              {label: "Catégorie", name: "tag", widget: "select", options: ["Organisation", "Matériel", "Retour de classe"]},
+              {label: "Résumé", name: "excerpt", widget: "text"},
+              {label: "Date", name: "date", widget: "date"},
+              {label: "Lien (optionnel, sinon laisser #)", name: "link", widget: "string", default: "#"}
+            ]}
